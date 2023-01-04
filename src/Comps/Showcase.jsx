@@ -1,33 +1,16 @@
-
-import { Carousel } from 'flowbite-react'
-import { final, mask, original, resize } from '../assets'
-const Showcase = () => {
+import React from 'react'
+import SpinningGallery from './SpinningGallery'
+import Alternatives from './Alternatives'
+const ShowCase = () => {
   return (
-    <div id='showcase'>
-        <div className="h-[600px] max-w-3xl glass p-2  ">
-            <Carousel slideInterval={8000}>
-                <img className='h-[600px] object-contain '
-                  src={original}
-                  alt="..."
-                />
-                <img className='h-[600px] object-contain'
-                  src={mask}
-                  alt="..."
-                />
-                <img className='h-[600px] object-contain'
-                  src={resize}
-                  alt="..."
-                />
-                <img className='h-[600px] object-contain'
-                  src={final}
-                  alt="..."
-                />
-               
-              </Carousel>
-
-        </div>
-    </div>
+    <div><div className={`mx-auto container glass p-4 grid grid-cols-2`}>
+    <SpinningGallery/>
+  <div className="max-w-lg p-4 mx-auto">
+    <Alternatives />
+  </div>
+ <p className="place-self-center">prest</p>
+</div></div>
   )
 }
 
-export default Showcase
+export default ShowCase

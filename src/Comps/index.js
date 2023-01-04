@@ -1,12 +1,15 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Hero from "./Hero";
-import Showcase from "./Showcase";
+import SpinningGallery from "./SpinningGallery";
 import Alternatives from "./Alternatives";
+import ShowCase from "./ShowCase";
+
 export {
   Navbar,
   Footer,
   Hero,
-  Showcase,
-  Alternatives
+  SpinningGallery,
+  Alternatives,
+  ShowCase
 };

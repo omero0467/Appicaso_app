@@ -8,6 +8,7 @@ import {me,
     tigerrocks,
     tigersavana,
 } from '../assets'
+import { Link } from 'react-router-dom'
 const Alternatives = () => {
   return (
     <div className='grid grid-cols-4 gap-3 max-w-xl'>
@@ -17,7 +18,9 @@ const Alternatives = () => {
         <img src={tigerocean} alt="" className='object-cover col-start-1 col-end-3 row-start-2'/>
         <img src={tigerrocks} alt="" className='object-cover'/>
         <img src={tigersavana} alt="" className='object-cover col-start-3 col-span-2 row-start-2' />
-        <div className='bg-blue-gradient rounded-lg shadow-xl flex items-center justify-center'><EllipsisHorizontalIcon className='h-16 text-white' /></div>
+        <Link to={'/gallery'}>
+          <div className='bg-blue-gradient rounded-lg h-full shadow-xl flex items-center justify-center'><EllipsisHorizontalIcon className='h-16 text-white' /></div>
+        </Link>
     </div>
   )
 }

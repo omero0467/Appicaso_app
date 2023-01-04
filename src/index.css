@@ -147,12 +147,24 @@
 #animation{
   height: 160px;
   width: 160px;
-  background: url('./assets/liquid-sprite.png') left center/cover;
-  animation: play infinite;
+  background: url('./assets/mogoHighFpsX601X84X50484.png') left center/cover;
+  animation: play 6s steps(84) infinite;
+  animation-play-state: paused;
+  border-radius: 60%;
+}
+
+#animation:hover{
+  animation-play-state: running;
 }
 
 @keyframes play {
-  100%{ background-position: -14000px;}
+  /* 0%{
+    background-position: 0 0;
+  } */
+
+  100%{
+    background-position:  -51941px;
+  }
 }
 
 #arrow-animation{
