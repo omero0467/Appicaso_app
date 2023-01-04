@@ -9,8 +9,9 @@ import { resizeSharp, variate } from "../utils";
 const ImageInterface = () => {
   const [imageData, setImageData] = useState();
   const [preview, setPreview] = useState(null);
-  const [size, setSize] = useState(null);
+  const [size, setSize] = useState(256);
   const [outputImage, setOutputImage] = useState('')
+  const [file, setFile] = useState(null)
 
 
   const clickHandle = (size, e) => {
@@ -28,13 +29,14 @@ const ImageInterface = () => {
     } else if (event.target) {
       file = event.target.files[0];
     }
+
     console.log(file);
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
       setImageData((prev)=>prev=reader.result);
       // uploadToCloudinary(reader.result)
-      variate(file,reader.result,setOutputImage)
+      variate(file,reader.result,setOutputImage,size)
       // setAttribute('crossOrigin', 'anonymous')
     };
     // reader.readAsArrayBuffer(files[0])

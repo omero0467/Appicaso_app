@@ -26,13 +26,16 @@ export const resizeSharp = async(file,imageDataUrl,setFunc)=>{
     console.error(error)
   }
   }
-export const variate = async(file,imageDataUrl,setFunc)=>{
+export const variate = async(file,imageDataUrl,setFunc,size)=>{
     try {
       let formData = new FormData()
       formData.append('image',file)
       formData.append("imageData", imageDataUrl)
+      formData.append('size',size)
       // const newfile = convertDataURIToBinary(image)
-    const response = await axios.post('http://127.0.0.1:8000/api/media/variate2',formData)
+    const response = await axios.post('http://127.0.0.1:8000/api/media/variate2',formData,{
+    'maxContentLength': Infinity,
+    'maxBodyLength': Infinity})
     // console.log(response.data)
     setFunc(response.data)
     

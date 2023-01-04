@@ -16,7 +16,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const upload = multer({
-  limits: { fieldSize: 25 * 1024 * 1024 },
+  limits: { fieldSize: 50 * 1024 * 1024 },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpeg|jpg|png)$/)) {
       return cb(new Error('Please upload an image file : .png/.jpeg/.jpg'))
@@ -131,7 +131,8 @@ export const editFromUser = async (req, res) => {
 
 export const variate2 = async (req, res) => {
   try {
-    const op = await sharp(req.file.buffer).resize(1024, 1024).png().toBuffer()
+    const size = +req.body.size
+    const op = await sharp(req.file.buffer).resize(size, size).png().toBuffer()
     console.log(req.body);
     res.set('Content-Type', 'image/png')
     op.name = "image.png";
@@ -139,7 +140,7 @@ export const variate2 = async (req, res) => {
     const response = await openai.createImageVariation(
       op,
       1,
-      "1024x1024"
+      `${size}x${size}`
     );
     let image_url = response.data.data[0].url;
     console.log(image_url);
