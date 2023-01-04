@@ -1,30 +1,64 @@
-import React ,{useState}from 'react'
-import { useEffect } from 'react'
-import Form from './Form'
-import Output from './Output'
-import Preview from './Preview'
-import SelectSize from './SelectSize'
-import Skeleton from './Skeleton'
+import React, { useState } from "react";
+import { useEffect } from "react";
+import Form from "./Form";
+import Output from "./Output";
+import Preview from "./Preview";
+import SelectSize from "./SelectSize";
+import Skeleton from "./Skeleton";
+import { resizeSharp, variate } from "../utils";
 const ImageInterface = () => {
-const [preview, setPreview] = useState(null)
-const [size, setSize] = useState(null)
-    const handleFile =(event)=>{
-        const [file] = event.target.files
-console.log(file)
- setPreview(prev=>prev=URL.createObjectURL(file))
-    }
+  const [imageData, setImageData] = useState();
+  const [preview, setPreview] = useState(null);
+  const [size, setSize] = useState(null);
+  const [outputImage, setOutputImage] = useState('')
 
-useEffect(()=>{console.log(size)},[size])
+
+  const clickHandle = (size, e) => {
+    e.stopPropagation();
+    setSize((prev) => (prev = size));
+  };
+
+  const handleFile = (event) => {
+    // const [file] = event.target.files;
+    setPreview((prev) => (prev = URL.createObjectURL(file)));
+    event.preventDefault();
+    let file
+    if (event.dataTransfer) {
+      file = event.dataTransfer.files[0]
+    } else if (event.target) {
+      file = event.target.files[0];
+    }
+    console.log(file);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setImageData((prev)=>prev=reader.result);
+      // uploadToCloudinary(reader.result)
+      variate(file,reader.result,setOutputImage)
+      // setAttribute('crossOrigin', 'anonymous')
+    };
+    // reader.readAsArrayBuffer(files[0])
+    
+  };
+
+  useEffect(() => {
+    console.log(outputImage);
+  }, [outputImage]);
+
   return (
     <div>
-    <Form className={'my-8'} handleFile={handleFile}/> 
-    {preview?<div className={`container md:flex`}>
-      <Preview className={'mr-8'} src={preview}/>
-      <SelectSize setSize={setSize}/>
-      <Output/>
-    </div>:<Skeleton/>}
-    </div>
-  )
-}
+      <Form className={"my-8"} handleFile={handleFile} />
+      {preview ? (
+        <div className={`container md:flex`}>
+          <Preview className={"mr-8"} src={preview} />
+          <SelectSize
+            currentSize={size}
+            clickHandle={clickHandle}
+            setSize={setSize} />
+          <Output outputRespone={outputImage} /> </div> ) : (
+            <Skeleton /> )}
+             </div>
+  );
+};
 
-export default ImageInterface
+export default ImageInterface;
