@@ -3,6 +3,7 @@ import { Hero, Navbar, Footer, SpinningGallery, Alternatives } from "./Comps";
 import Landing from "./Pages/Landing";
 import styles from "./styles";
 import { Route,Routes } from "react-router-dom";
+import Variation from "./Pages/Variation";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
 <Navbar></Navbar>
 <Routes>
 <Route path={'/'} element={<Landing/>}/>
+<Route path={'/variation'} element={<Variation/>}/>
 </Routes>
 </>
   );
