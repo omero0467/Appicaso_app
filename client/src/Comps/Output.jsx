@@ -15,11 +15,11 @@ const Output = ({ outputRespone, isLoading }) => {
             <SkeletonLoader isLoading={isLoading} />
             )}
          <Button
-         className="w-full buttonClass"
+         className="w-full mt-8  buttonClass"
       outline={true}
       gradientDuoTone="purpleToBlue"
       >
-      <div className="flex items-end mb-1">
+      <div className="flex flex-grow items-end mb-1">
         <span>Save
         </span>
         <CheckIcon className="h-6 inline-block" />

@@ -203,10 +203,11 @@ input[type="file"]::file-selector-button {
 }
 
 .buttonClass>span{
+  text-align: center;
   width: 100%;
-  align-self: center;
+  /* align-self: center; */
 }
-
-.buttonClass{
-
+.buttonClass>span>div{
+  position: relative;
+  left: 45%;
 }
