@@ -57,7 +57,7 @@ export const edit = async (req, res) => {
     const response = await openai.createImageEdit(
       fs.createReadStream("/Users/omerevron/Code/Bootcamp/Final Project/server/Routes/media/Test photos/tigermask1024.png"),
       fs.createReadStream("/Users/omerevron/Code/Bootcamp/Final Project/server/Routes/media/Test photos/tigermask1024.png"),
-      "a tiger floating in the ocean",
+      req.body.userInput,
       1,
       "512x512"
     );
@@ -106,26 +106,36 @@ export const variate = async (req, res) => {
 
 export const editFromUser = async (req, res) => {
   try {
+    const size = +req.body.size
+    const op = await sharp(req.file.buffer).resize(size, size).png().toBuffer()
+    const mask = await sharp(req.file.buffer).resize(size, size).png().toBuffer()
+    // console.log(op);
+    console.log({mask,
+input: req.body.userInput,
+body: req.body});
+res.set('Content-Type', 'image/png')
+op.name = "image.png";
     const response = await openai.createImageEdit(
-      fs.createReadStream("/Users/omerevron/Code/Bootcamp/Final Project/server/Routes/media/Test photos/tigermask1024.png"),
-      fs.createReadStream("/Users/omerevron/Code/Bootcamp/Final Project/server/Routes/media/Test photos/tigermask1024.png"),
-      "a tiger floating in the ocean",
+      op,mask,
+      `${req.body.userInput}`,
       1,
-      "512x512"
+      `${size}x${size}`
     );
     let image_url = response.data.data[0].url;
-
     console.log(image_url);
-    res.send(`<img src='${image_url}' alt="hi">`)
+    return res.send(image_url)
   } catch (error) {
     if (error.response) {
-      res.status(error.response.status).send(error.response.data)
       console.log(error.response.status);
       console.log(error.response.data);
-    } else {
+      return res.status(error.response.status).send(error.response.data)
+    } else if(error.message) {
       console.log(error.message);
-      res.status(500).send(error.message)
-    }
+      return res.status(500).send(error.message)
+    } else {
+    console.error(error)
+    return res.status(400).send(error)
+  }
   }
 }
 
@@ -164,6 +174,7 @@ export const variate2 = async (req, res) => {
 
 
 mediaRouter.post('/variate', variate)
-mediaRouter.post('/edit', edit)
+mediaRouter.post('/edit',upload.single('image'),editFromUser,errorHandle)
 mediaRouter.post('/editref', editRef)
 mediaRouter.post('/variate2', upload.single('image'), variate2, errorHandle)
+mediaRouter.post('/editbg', upload.single('image'), editFromUser, errorHandle)

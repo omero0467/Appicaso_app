@@ -45,11 +45,14 @@ export const editBgAuto = async(file,imageDataUrl,setFunc,size)=>{
   }
 export const editBg = async(file,userInput,setFunc,size)=>{
     try {
+      console.log(file);
+      console.log(userInput);
+      console.log(setFunc);
+      console.log(size);
       let formData = new FormData()
       formData.append('image',file)
       console.log(userInput);
       formData.append('userInput',userInput)
-      formData.append("imageData", imageDataUrl)
       formData.append('size',size)
       // const newfile = convertDataURIToBinary(image)
     const response = await axios.post('http://127.0.0.1:8000/api/media/editbg',formData,{

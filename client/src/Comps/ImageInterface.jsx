@@ -20,11 +20,10 @@ const ImageInterface = ({sendReqtoEdit,Type}) => {
   };
 
   const handleInput = (event) => {
-
+    setImageData(prev=>prev=event.target.value)
   };
   const handleFile = (event) => {
     // const [file] = event.target.files;
-    setPreview((prev) => (prev = URL.createObjectURL(file)));
     event.preventDefault();
     let file
     if (event.dataTransfer) {
@@ -32,12 +31,12 @@ const ImageInterface = ({sendReqtoEdit,Type}) => {
     } else if (event.target) {
       file = event.target.files[0];
     }
+    setPreview((prev) => (prev = URL.createObjectURL(file)));
 
-    console.log(file);
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      setImageData((prev)=>prev=reader.result);
+      Type!=='edit'&&setImageData((prev)=>prev=reader.result)
       // uploadToCloudinary(reader.result)
       sendReqtoEdit(file,imageData,setOutputImage,size)
       // setAttribute('crossOrigin', 'anonymous')
@@ -47,12 +46,12 @@ const ImageInterface = ({sendReqtoEdit,Type}) => {
   };
 
   useEffect(() => {
-    console.log(outputImage);
-  }, [outputImage]);
+    console.log(imageData);
+  }, [imageData]);
 
   return (
     <div>
-      <Form Type={Type} className={"my-8"} handleFile={handleFile} />
+      <Form Type={Type} handleInput={handleInput} className={"my-8"} handleFile={handleFile} />
       {preview ? (
         <div className={`container md:flex`}>
           <Preview className={"mr-8"} src={preview} />
