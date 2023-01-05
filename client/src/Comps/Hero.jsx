@@ -1,5 +1,5 @@
 import React from 'react'
-import { backgroundXL, liquid, logo } from '../assets'
+import { logo } from '../assets'
 import {ArrowDownIcon} from '@heroicons/react/24/solid'
 const Hero = () => {
   return (
