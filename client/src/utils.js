@@ -26,6 +26,42 @@ export const resizeSharp = async(file,imageDataUrl,setFunc)=>{
     console.error(error)
   }
   }
+export const editBgAuto = async(file,imageDataUrl,setFunc,size)=>{
+    try {
+      let formData = new FormData()
+      formData.append('image',file)
+      formData.append("imageData", imageDataUrl)
+      formData.append('size',size)
+      // const newfile = convertDataURIToBinary(image)
+    const response = await axios.post('http://127.0.0.1:8000/api/media/editbg',formData,{
+    'maxContentLength': Infinity,
+    'maxBodyLength': Infinity})
+    // console.log(response.data)
+    setFunc(response.data)
+    
+  } catch (error) {
+    console.error(error)
+  }
+  }
+export const editBg = async(file,userInput,setFunc,size)=>{
+    try {
+      let formData = new FormData()
+      formData.append('image',file)
+      console.log(userInput);
+      formData.append('userInput',userInput)
+      formData.append("imageData", imageDataUrl)
+      formData.append('size',size)
+      // const newfile = convertDataURIToBinary(image)
+    const response = await axios.post('http://127.0.0.1:8000/api/media/editbg',formData,{
+    'maxContentLength': Infinity,
+    'maxBodyLength': Infinity})
+    // console.log(response.data)
+    setFunc(response.data)
+    
+  } catch (error) {
+    console.error(error)
+  }
+  }
 export const variate = async(file,imageDataUrl,setFunc,size)=>{
     try {
       let formData = new FormData()

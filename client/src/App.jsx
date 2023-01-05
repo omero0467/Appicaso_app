@@ -4,6 +4,7 @@ import Landing from "./Pages/Landing";
 import styles from "./styles";
 import { Route,Routes } from "react-router-dom";
 import Variation from "./Pages/Variation";
+import EditBg from "./Pages/EditBg";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
 <Routes>
 <Route path={'/'} element={<Landing/>}/>
 <Route path={'/variation'} element={<Variation/>}/>
+<Route path={'/edit'} element={<EditBg/>}/>
 </Routes>
 </>
   );
