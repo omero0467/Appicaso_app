@@ -201,3 +201,12 @@ input[type="file"]::file-selector-button {
 .navbar{
   background-color: transparent !important;
 }
+
+.buttonClass>span{
+  width: 100%;
+  align-self: center;
+}
+
+.buttonClass{
+
+}
