@@ -4,7 +4,7 @@ import { Route,Routes } from "react-router-dom";
 import Variation from "./Pages/Variation";
 import EditBg from "./Pages/EditBg";
 import NavFlow from "./Comps/NavFlow";
-
+import { Navbar } from "./Comps";
 function App() {
   return (
 <>

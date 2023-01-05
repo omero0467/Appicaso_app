@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Hero, Navbar, Footer,ShowCase } from "../Comps";
+import { Hero, Footer,ShowCase } from "../Comps";
 import styles from "../styles";
 
 const Landing = () => {

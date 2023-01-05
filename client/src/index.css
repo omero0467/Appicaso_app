@@ -197,3 +197,7 @@ input[type="file"]::file-selector-button {
   transition: .5s;
   margin-right: 1rem;
 }
+
+.navbar{
+  background-color: transparent !important;
+}

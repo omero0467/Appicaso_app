@@ -55,7 +55,7 @@ export const editBg = async(file,userInput,setFunc,size)=>{
       formData.append('userInput',userInput)
       formData.append('size',size)
       // const newfile = convertDataURIToBinary(image)
-    const response = await axios.post('http://127.0.0.1:8000/api/media/editbg',formData,{
+    const response = await imageProcessing.post('/media/editbg',formData,{
     'maxContentLength': Infinity,
     'maxBodyLength': Infinity})
     // console.log(response.data)

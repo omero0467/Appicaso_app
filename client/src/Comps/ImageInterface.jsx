@@ -5,7 +5,6 @@ import Output from "./Output";
 import Preview from "./Preview";
 import SelectSize from "./SelectSize";
 import Skeleton from "./Skeleton";
-import { resizeSharp, variate } from "../utils";
 const ImageInterface = ({sendReqtoEdit,Type}) => {
   const [imageData, setImageData] = useState();
   const [preview, setPreview] = useState(null);

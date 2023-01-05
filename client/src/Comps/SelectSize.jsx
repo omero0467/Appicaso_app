@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { CheckCircleIcon } from '@heroicons/react/24/solid'
 const SelectSize = ({setSize, currentSize,clickHandle}) => {
 

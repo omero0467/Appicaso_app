@@ -2,8 +2,6 @@ import React from 'react'
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid'
 import {me,
     me1,
-    me2,
-    me3,
     tigerocean,
     tigerrocks,
     tigersavana,
