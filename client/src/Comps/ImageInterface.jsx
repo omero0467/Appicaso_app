@@ -6,7 +6,7 @@ import Preview from "./Preview";
 import SelectSize from "./SelectSize";
 import Skeleton from "./Skeleton";
 import { resizeSharp, variate } from "../utils";
-const ImageInterface = () => {
+const ImageInterface = ({sendReqtoEdit,Type}) => {
   const [imageData, setImageData] = useState();
   const [preview, setPreview] = useState(null);
   const [size, setSize] = useState(256);
@@ -19,6 +19,9 @@ const ImageInterface = () => {
     setSize((prev) => (prev = size));
   };
 
+  const handleInput = (event) => {
+
+  };
   const handleFile = (event) => {
     // const [file] = event.target.files;
     setPreview((prev) => (prev = URL.createObjectURL(file)));
@@ -36,7 +39,7 @@ const ImageInterface = () => {
     reader.onload = () => {
       setImageData((prev)=>prev=reader.result);
       // uploadToCloudinary(reader.result)
-      variate(file,reader.result,setOutputImage,size)
+      sendReqtoEdit(file,imageData,setOutputImage,size)
       // setAttribute('crossOrigin', 'anonymous')
     };
     // reader.readAsArrayBuffer(files[0])
@@ -49,7 +52,7 @@ const ImageInterface = () => {
 
   return (
     <div>
-      <Form className={"my-8"} handleFile={handleFile} />
+      <Form Type={Type} className={"my-8"} handleFile={handleFile} />
       {preview ? (
         <div className={`container md:flex`}>
           <Preview className={"mr-8"} src={preview} />
