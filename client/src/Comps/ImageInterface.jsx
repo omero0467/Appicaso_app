@@ -11,11 +11,22 @@ const ImageInterface = ({sendReqtoEdit,Type}) => {
   const [size, setSize] = useState(256);
   const [outputImage, setOutputImage] = useState('')
   const [file, setFile] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
 
-  const clickHandle = (size, e) => {
+  const clickHandle = async (size, e) => {
+   try{ 
     e.stopPropagation();
-    setSize((prev) => (prev = size));
+    setIsLoading(true)
+    setOutputImage('')
+    if(!isLoading){
+      setSize((prev) => (prev = size));
+      await sendReqtoEdit(file,imageData,setOutputImage,size)
+      setIsLoading(false)
+    }
+  }catch(err){
+      console.error(err);
+    }
   };
 
   const handleInput = (event) => {
@@ -36,8 +47,8 @@ const ImageInterface = ({sendReqtoEdit,Type}) => {
     reader.readAsDataURL(file);
     reader.onload = () => {
       Type!=='edit'&&setImageData((prev)=>prev=reader.result)
+      setFile(prev=>prev=file)
       // uploadToCloudinary(reader.result)
-      sendReqtoEdit(file,imageData,setOutputImage,size)
       // setAttribute('crossOrigin', 'anonymous')
     };
     // reader.readAsArrayBuffer(files[0])
@@ -45,8 +56,8 @@ const ImageInterface = ({sendReqtoEdit,Type}) => {
   };
 
   useEffect(() => {
-    console.log(imageData);
-  }, [imageData]);
+    console.log(file);
+  }, [file]);
 
   return (
     <div>
@@ -55,13 +66,14 @@ const ImageInterface = ({sendReqtoEdit,Type}) => {
         <div className={`container md:flex`}>
           <Preview className={"mr-8"} src={preview} />
           <SelectSize
+          isLoading={isLoading}
             currentSize={size}
             clickHandle={clickHandle}
-            setSize={setSize} />
-          <Output outputRespone={outputImage} /> </div> ) : (
-            <Skeleton /> )}
+            />
+          <Output isLoading={isLoading} outputRespone={outputImage} /> </div> ) : (
+            <Skeleton/>)}
              </div>
-  );
+  ); 
 };
 
 export default ImageInterface;
