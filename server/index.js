@@ -10,12 +10,13 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 app.use(json({limit: '50mb'}));
 app.use(cors());
-const publicPath = path.join(__dirname, 'server','build');
+const publicPath = path.join(__dirname, 'build');
 app.use(express.static(publicPath));
+console.log(publicPath);
 app.use("/api", indexRouter);
 app.get('*', (req, res) => {
    console.log(__dirname);
-   res.sendFile(path.resolve(__dirname,'build','index.html'));
+   res.sendFile(path.resolve(__dirname,'index.html'));
  });
 app.listen(PORT, () => {
    console.log( ` ^_^ Server running on port ${PORT}`);
