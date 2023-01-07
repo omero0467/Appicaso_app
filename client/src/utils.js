@@ -18,7 +18,7 @@ export const resizeSharp = async(file,imageDataUrl,setFunc)=>{
       formData.append('image',file)
       formData.append("imageData", imageDataUrl)
       // const newfile = convertDataURIToBinary(image)
-    const response = await axios.post('http://127.0.0.1:8000/api/cloudinary/resizesharp',formData)
+    const response = await imageProcessing.post('/cloudinary/resizesharp',formData)
     // console.log(response.data)
     setFunc(response.data)
     
@@ -33,7 +33,7 @@ export const editBgAuto = async(file,imageDataUrl,setFunc,size)=>{
       formData.append("imageData", imageDataUrl)
       formData.append('size',size)
       // const newfile = convertDataURIToBinary(image)
-    const response = await axios.post('http://127.0.0.1:8000/api/media/editbg',formData,{
+    const response = await imageProcessing.post('/media/editbg',formData,{
     'maxContentLength': Infinity,
     'maxBodyLength': Infinity})
     // console.log(response.data)
@@ -72,7 +72,7 @@ export const variate = async(file,imageDataUrl,setFunc,size)=>{
       formData.append("imageData", imageDataUrl)
       formData.append('size',size)
       // const newfile = convertDataURIToBinary(image)
-    const response = await axios.post('http://127.0.0.1:8000/api/media/variate2',formData,{
+    const response = await imageProcessing.post('/media/variate2',formData,{
     'maxContentLength': Infinity,
     'maxBodyLength': Infinity})
     // console.log(response.data)
