@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 app.use(json({limit: '50mb'}));
 app.use(cors());
-const publicPath = path.join(__dirname, 'build');
+const publicPath = path.join(__dirname, 'dist');
 app.use(express.static(publicPath));
 console.log(publicPath);
 app.use("/api", indexRouter);
