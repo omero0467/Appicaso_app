@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "devStart": "nodemon index",
-    "deploy" : "npm i --prefix ../client && npm run build && --prefix ../client && cp -r ../client/dist ."
+    "deploy" : "npm i --prefix ../client && npm run build --prefix ../client && cp -r ../client/dist ."
   },
   "keywords": [],
   "author": "",
